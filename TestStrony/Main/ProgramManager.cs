@@ -38,7 +38,7 @@ namespace TestStrony.Main
             List<string> queries = PostgreSQLQueryBuilder.GetRudolphPointsQuery(records, url);
             foreach (var (key, value) in records)
             {
-                SqlDataManager.DataBaseConnection(queries[adder], key);
+                SqlDataManager.DataBaseConnection(queries[adder]);
                 adder++;
             }
         }

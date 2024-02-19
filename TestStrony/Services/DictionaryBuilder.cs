@@ -12,25 +12,19 @@ namespace TestStrony.Services
             /* in this function program uses table of word records and table of certain athlete records, then by reversing pattern on fina points program gets certain time (equivalent of time on long course with certain amount of fina points) */
             // the basic pattern is FINA Points = ((World Record/Athlete Personal Best)^3)*1000
             List<double> wrs = ListBuilder.GetTimes(records, url);
-            Dictionary<string, double> doubleded = new Dictionary<string, double>();
-            List<string> queries = PostgreSQLQueryBuilder.GetRudolphPointsQuery(records, url);
-
+            Dictionary<string, double> athleteRecords = new Dictionary<string, double>();
             int adder = 0;
             foreach (var (key, value) in records)
             {
                 try
                 {
-                    double doubled = Math.Round(((1 / Math.Pow((value / 1000), (1.0 / 3.0))) * wrs[adder]), 2);
-
-                    doubleded.Add(DataFormat.StrokeTranslation(key), doubled);
+                    double convertedToLongCourseTime = Math.Round(((1 / Math.Pow((value / 1000), (1.0 / 3.0))) * wrs[adder]), 2);
+                    athleteRecords.Add(DataFormat.StrokeTranslation(key), convertedToLongCourseTime);
                     adder++;
                 }
-                catch
-                {
-
-                }
+                catch { }
             }
-            return doubleded;
+            return athleteRecords;
         }
         public static Dictionary<string, double> AthleteRecords(string url)
         {

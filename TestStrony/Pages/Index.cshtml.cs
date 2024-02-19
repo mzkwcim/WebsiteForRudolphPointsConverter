@@ -30,14 +30,16 @@ public class IndexModel : PageModel
         string lastName = LastName;
         string url = LinkGettingSystem.Link(firstName, lastName);
         Dictionary<string, double> records = DictionaryBuilder.CalculatePointsFromShortCourseToLongCourseTime(DictionaryBuilder.AthleteRecords(url), url);
+        Console.WriteLine("Zakoñczono zbieranie rekordów");
         List<string> queries = PostgreSQLQueryBuilder.GetRudolphPointsQuery(records, url);
-
+        Console.WriteLine("zakoñczono tworzenie query");
         SearchResults = new List<WynikModel>();
 
         int adder = 0;
         foreach (var (key, value) in records)
         {
-            int odp = Convert.ToInt32(SqlDataManager.DataBaseConnection(queries[adder], key));
+            int odp = Convert.ToInt32(SqlDataManager.DataBaseConnection(queries[adder]));
+            Console.WriteLine("w ONPOSTSEARCH");
             Console.WriteLine(DataFormat.TranslateStrokeBack(key));
             Console.WriteLine(odp);
             SearchResults.Add(new WynikModel
@@ -47,6 +49,7 @@ public class IndexModel : PageModel
             });
             adder++;
         }
+        ViewData["SearchResults"] = SearchResults;
     }
 
     public class WynikModel

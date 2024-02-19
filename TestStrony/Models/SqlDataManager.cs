@@ -53,7 +53,7 @@ namespace TestStrony.Models
                 return result != null && (bool)result;
             }
         }
-        public static string DataBaseConnection(string query, string key)
+        public static string DataBaseConnection(string query)
         {
             object value1;
             string odp = "";

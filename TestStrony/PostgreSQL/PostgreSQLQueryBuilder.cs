@@ -37,9 +37,11 @@ namespace TestStrony.PostgreSQL
         public static List<string> GetRudolphPointsQuery(Dictionary<string, double> records, string url)
         {
             List<string> queries = new List<string>();
+            int adder = 0;
             foreach (var (key, value) in records)
             {
                 queries.Add($"SELECT punkty FROM {TextCrawler.GetTableName(url)} WHERE {key} >= {value} LIMIT 1;");
+                adder++;
             }
             return queries;
         }

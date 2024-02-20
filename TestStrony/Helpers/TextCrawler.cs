@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using Microsoft.Extensions.Primitives;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace TestStrony.Helpers
 {
@@ -17,5 +19,17 @@ namespace TestStrony.Helpers
         }
         public static string GetTableName(string url) => (GetAge(url) == "open") ? $"rudolphtableopen{CheckGender(url)}" : $"rudolphtable{GetAge(url)}yearsold{CheckGender(url)}";
         public static string CheckGender(string url) => Scraper.Loader(url).DocumentNode.SelectSingleNode("//div[@id='name']").InnerHtml.Contains("gender1.png") ? "boys" : "girls";
+        public static string SpecialCharacterConverter(string input)
+        {
+            Dictionary<char, char> characterMap = new Dictionary<char, char>
+            {
+                {'ą', 'a'}, {'ć', 'c'}, {'ę', 'e'},
+                {'ł', 'l'}, {'ń', 'n'}, {'ó', 'o'},
+                {'ś', 's'}, {'ź', 'z'}, {'ż', 'z'}
+            };
+            StringBuilder resultString = new StringBuilder(input.Length);
+            foreach (char singleCharacter in input) { resultString.Append(characterMap.ContainsKey(singleCharacter) ? characterMap[singleCharacter] : singleCharacter); }
+            return resultString.ToString();
+        }
     }
 }

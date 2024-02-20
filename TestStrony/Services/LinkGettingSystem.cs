@@ -6,11 +6,11 @@ namespace TestStrony.Services
 {
     public class LinkGettingSystem
     {
-        private static AutoResetEvent autoResetEvent = new AutoResetEvent(false);
+        private static AutoResetEvent autoResetEvent = new(false);
 
         public static string Link(string firstName, string lastName)
         {
-            ChromeOptions chromeOptions = new ChromeOptions();
+            ChromeOptions chromeOptions = new();
             chromeOptions.AddArgument("--headless");
             IWebDriver driver = new ChromeDriver(chromeOptions);
 

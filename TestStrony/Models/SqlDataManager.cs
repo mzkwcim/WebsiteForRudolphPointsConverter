@@ -57,7 +57,7 @@ namespace TestStrony.Models
         {
             object value1;
             string odp = "";
-            string connectionString = "Host=localhost;Username=postgres;password=Mzkwcim181099!;Database=RudolphTable";
+            string connectionString = "Host=localhost;Username=postgres;password=xd;Database=RudolphTable";
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();

@@ -19,7 +19,7 @@ namespace TestStrony.Models
                         using (NpgsqlCommand command2 = new NpgsqlCommand(PostgreSQLQueryBuilder.AddValuesToQuery(name, collumnNames, tableValues), connection))
                         {
                             command2.ExecuteNonQuery();
-                            Console.WriteLine("Dane zostały dodane do tabeli");
+                            Console.WriteLine("Data has been added to the table");
                         }
                     }
                     else
@@ -27,12 +27,12 @@ namespace TestStrony.Models
                         using (NpgsqlCommand command = new NpgsqlCommand(PostgreSQLQueryBuilder.CreateTable(name, collumnNames), connection))
                         {
                             command.ExecuteNonQuery();
-                            Console.WriteLine("Baza Utworzona");
+                            Console.WriteLine("Table has been created");
                         }
                         using (NpgsqlCommand command2 = new NpgsqlCommand(PostgreSQLQueryBuilder.AddValuesToQuery(name, collumnNames, tableValues), connection))
                         {
                             command2.ExecuteNonQuery();
-                            Console.WriteLine("Dane zostały dodane do tabeli");
+                            Console.WriteLine("Data has been added to the tabel");
                         }
                     }
                 }
